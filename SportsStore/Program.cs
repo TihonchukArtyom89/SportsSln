@@ -1,5 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using SportsStore.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<StoreDbContext>(opts => { opts.UseSqlServer(builder.Configuration["ConnectionStringS:SportsStoreConnection"])});
 var app = builder.Build();
 
 //app.MapGet("/", () => "Hello World!");
