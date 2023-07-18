@@ -22,7 +22,7 @@ public class HomeControllerTests
         mock.Setup(m => m.Products).Returns((new Product[] { new Product { ProductID = 1, Name = "P1" }, new Product { ProductID = 2, Name = "P2" } }).AsQueryable<Product>());
         HomeController controller = new HomeController(mock.Object);
         //Act
-        ProductsListViewModel result = controller.Index()?.ViewData.Model as ProductsListViewModel ?? new();
+        ProductsListViewModel result = controller.Index(null)?.ViewData.Model as ProductsListViewModel ?? new();
         //Assert
         Product[] prodArray = result.Products.ToArray();
         Assert.True(prodArray.Length == 2);
@@ -45,7 +45,7 @@ public class HomeControllerTests
         HomeController controller = new HomeController(mock.Object);
         controller.PageSize = 3;
         //Act
-        ProductsListViewModel result = controller.Index(2)?.ViewData.Model as ProductsListViewModel ?? new();
+        ProductsListViewModel result = controller.Index(null,2)?.ViewData.Model as ProductsListViewModel ?? new();
         //Assert
         Product[] prodArray = result.Products.ToArray();
         Assert.True(prodArray.Length == 2);
@@ -67,7 +67,7 @@ public class HomeControllerTests
         }).AsQueryable<Product>());
         HomeController controller = new HomeController(mock.Object) { PageSize = 3 };
         //Act
-        ProductsListViewModel result = controller.Index(2)?.ViewData.Model as ProductsListViewModel ?? new();
+        ProductsListViewModel result = controller.Index(null, 2)?.ViewData.Model as ProductsListViewModel ?? new();
         //Assert
         PagingInfo pageInfo = result.PagingInfo;
         Assert.Equal(2, pageInfo.CurrentPage);
