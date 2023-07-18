@@ -21,12 +21,12 @@ public class HomeController : Controller
         .OrderBy(p => p.ProductID)
         .Skip((productPage - 1) * PageSize)
         .Take(PageSize),
-        PagingInfo = 
+        PagingInfo =
         {
-            CurrentPage = productPage, 
-            ItemsPerPage = PageSize, 
-            TotalItems = repository.Products.Count() 
+            CurrentPage = productPage,
+            ItemsPerPage = PageSize,
+            TotalItems = category== null ?repository.Products.Count() : repository.Products.Where(e=>e.Category==category).Count()
         },
-        CurrentCategory=category
+        CurrentCategory = category
     });
 }

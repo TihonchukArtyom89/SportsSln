@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Moq;
 using SportsStore.Components;
 using SportsStore.Models;
 using Xunit;
+using Microsoft.AspNetCore.Routing;
 
 namespace SportsStore.Tests;
 
@@ -30,6 +32,25 @@ public class NavigationMenuViewComponentTests
         //Act - get the set of categories
         string[] results = ((IEnumerable<string>?)(target.Invoke() as ViewViewComponentResult)?.ViewData?.Model ?? Enumerable.Empty<string>()).ToArray();
         //Assert
-        Assert.True(Enumerable.SequenceEqual(new string[] { "Apples","Oranges","Plums"},results));
+        Assert.True(Enumerable.SequenceEqual(new string[] { "Apples", "Oranges", "Plums" }, results));
+    }
+    [Fact]
+    public void Indicates_Selected_Category()
+    {
+        //Arrange
+        string categoryToSelect = "Apples";
+        Mock<IStoreRepository> mock = new Mock<IStoreRepository>();
+        mock.Setup(m => m.Products).Returns((new Product[]
+        {
+            new Product { ProductID=1, Name ="P1",Category="Apples"},
+            new Product { ProductID=4, Name ="P4",Category="Oranges"},
+        }).AsQueryable<Product>());
+        NavigationMenuViewComponent target = new NavigationMenuViewComponent(mock.Object);
+        target.ViewComponentContext = new ViewComponentContext { ViewContext = new ViewContext { RouteData = new RouteData() } };
+        target.RouteData.Values["category"]=categoryToSelect;
+        //Act - get the set of categories
+        string? result = (string?)(target.Invoke() as ViewViewComponentResult)?.ViewData?["SelectedCategory"];
+        //Assert
+        Assert.Equal(categoryToSelect, result);
     }
 }

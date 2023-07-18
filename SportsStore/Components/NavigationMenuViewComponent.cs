@@ -3,7 +3,7 @@ using SportsStore.Models;
 
 namespace SportsStore.Components;
 
-public class NavigationMenuViewComponent:ViewComponent
+public class NavigationMenuViewComponent : ViewComponent
 {
     private IStoreRepository repository;
 
@@ -13,6 +13,7 @@ public class NavigationMenuViewComponent:ViewComponent
     }
     public IViewComponentResult Invoke()
     {
-        return View(repository.Products.Select(x=>x.Category).Distinct().OrderBy(x=>x));
+        ViewBag.SelectedCategory = RouteData?.Values["category"];
+        return View(repository.Products.Select(x => x.Category).Distinct().OrderBy(x => x));
     }
 }
