@@ -18,6 +18,7 @@ public class CartModel : PageModel
     public void OnGet(string returnUrl)
     {
         ReturnUrl = returnUrl ?? "/";
+
         //Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
     }
     public IActionResult OnPost(long productId, string returnUrl)
@@ -27,6 +28,11 @@ public class CartModel : PageModel
         {
             Cart.AddItem(product, 1);
         }
+        return RedirectToPage(new { returnUrl = returnUrl });
+    }
+    public IActionResult OnPostRemove(long productId, string returnUrl)
+    {
+        Cart.RemoveLine(Cart.Lines.First(cl => cl.Product.ProductID == productId).Product);
         return RedirectToPage(new { returnUrl = returnUrl });
     }
 }
