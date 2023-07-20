@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace SportsStore.Infrastructure;
+﻿namespace SportsStore.Infrastructure;
 
 public static class UrlExtensions
 {
