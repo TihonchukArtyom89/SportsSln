@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<StoreDbContext>(opts => { opts.UseSqlServer(builder.Configuration["ConnectionStrings:SportsStoreConnection"]); });
 builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
+builder.Services.AddScoped<IOrderRepository,EFOrderRepository>();
 builder.Services.AddRazorPages();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
@@ -22,4 +23,6 @@ app.MapDefaultControllerRoute();
 app.MapRazorPages();
 SeedData.EnsurePopulated(app);
 app.Run();
-// reset databse in command line in SportsStore folder enter this: dotnet ef database drop --force --context StoreDbContext
+//if troubles with launch project (same objects in database)
+// reset databse in command line in SportsStore folder enter this: dotnet ef database drop --force --context StoreDbContext  
+//and after first command enter this: dotnet ef database update --context StoreDbContext

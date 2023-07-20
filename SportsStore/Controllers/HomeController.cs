@@ -25,7 +25,7 @@ public class HomeController : Controller
         {
             CurrentPage = productPage,
             ItemsPerPage = PageSize,
-            TotalItems = category== null ?repository.Products.Count() : repository.Products.Where(e=>e.Category==category).Count()
+            TotalItems = category== null ? repository.Products.Count() : repository.Products.Where(e=>e.Category==category).Count()
         },
         CurrentCategory = category
     });
