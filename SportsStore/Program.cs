@@ -12,6 +12,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddScoped<Cart>(sp => SessionCart.GetCat(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddServerSideBlazor();
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseSession();
@@ -21,6 +22,8 @@ app.MapControllerRoute("category", "{category}", new { Controller = "Home", Acti
 app.MapControllerRoute("pagination", "Products/Page{productPage}", new { Controller = "Home", Action = "Index", productPage = 1 });
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
+app.MapBlazorHub();
+app.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
 SeedData.EnsurePopulated(app);
 app.Run();
 //if troubles with launch project (same objects in database)
