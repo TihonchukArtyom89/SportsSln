@@ -1,4 +1,5 @@
 ﻿@page "/admin"
+@using SportsStore.Pages.Admin;
 @{
     Layout = null;
 }
@@ -9,7 +10,7 @@
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-        <component type="typeof(RouteData)" render-mode="Server" />
+        <component type="typeof(Routed)" render-mode="Server" />
         <script src="/_framework/blazor.server.js"></script>
 </body>
 </html>
