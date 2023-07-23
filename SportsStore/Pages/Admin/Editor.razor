@@ -25,7 +25,7 @@
         {
             Repository.SaveProduct(Product);
         }
-        NavManager?.NavigateTo("/admin/products");
+        NavManager?.NavigateTo("/admin");
     }
     public string ThemeColor => Id == 0 ? "primary" : "warning";
     public string TitleText => Id == 0 ? "Create" : "Edit";
