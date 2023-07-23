@@ -33,5 +33,6 @@ SeedData.EnsurePopulated(app);
 IdentitySeedData.EnsurePopulated(app);
 app.Run();
 //if troubles with launch project (same objects in database)
-// reset databse in command line in SportsStore folder enter this: dotnet ef database drop --force --context StoreDbContext  
+// reset SportsStore databse in command line in SportsStore folder enter this: dotnet ef database drop --force --context StoreDbContext  
 //and after first command enter this: dotnet ef database update --context StoreDbContext
+//reset Identity databse in command line in SportsStore folder enter this: dotnet ef database drop --force --context AppIdentityDbContext
