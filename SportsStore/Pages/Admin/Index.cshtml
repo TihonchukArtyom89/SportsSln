@@ -1,6 +1,9 @@
 ﻿
 @page "/admin"
 @using SportsStore.Pages.Admin;
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
+
 @{
     Layout = null;
 }
