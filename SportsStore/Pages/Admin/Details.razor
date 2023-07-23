@@ -11,7 +11,7 @@
         Product = Repository?.Products.FirstOrDefault(p => p.ProductID == Id);
     }
     public string EditUrl => $"/admin/products/edit/{Product?.ProductID}";
-    public string BackUrl => $"/admin";
+    //public string BackUrl => $"/admin/products";
 }
 
 <h3 class="bg-info text-white text-center p-1">Details</h3>
@@ -26,4 +26,4 @@
 </table>
 
 <NavLink class="btn btn-warning" href="@EditUrl">Edit</NavLink>
-<NavLink class="btn btn-secondary" href="@BackUrl">Back</NavLink>
+<NavLink class="btn btn-secondary" href="/admin/products">Back</NavLink>

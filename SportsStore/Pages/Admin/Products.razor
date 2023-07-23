@@ -12,6 +12,11 @@
     {
         await UpdataData();
     }
+    public async Task DeleteProduct(Product p)
+    {
+        Repository.DeleteProduct(p);
+        await UpdataData();
+    }
     public string GetDetailsUrl(long id) => $"/admin/products/details/{id}";
     public string GetEditUrl(long id) => $"/admin/products/edit/{id}";
 }
@@ -37,6 +42,7 @@
                     <td>
                         <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(p.ProductID ?? 0)">Details</NavLink>
                         <NavLink class="btn btn-warning btn-sm" href="@GetEditUrl(p.ProductID ?? 0)">Edit</NavLink>
+                        <NavLink class="btn btn-danger btn-sm" @onclick="@(e=>DeleteProduct(p))">Delete</NavLink>
                     </td>
                 </tr>
             }
@@ -48,3 +54,4 @@
     </tbody>
 </table>
 <NavLink class="btn btn-primary" href="/admin/products/create">Create</NavLink>
+
